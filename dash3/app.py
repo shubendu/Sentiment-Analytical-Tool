@@ -7,6 +7,7 @@ import dash_bootstrap_components as dbc
 import pandas as pd
 from collections import OrderedDict
 import dash_table
+import plotly.graph_objects as go
 
 
 card = dbc.Card(
@@ -33,6 +34,11 @@ card2 = dbc.Card(
 
 df = pd.read_csv("my_stocks.csv")
 df1 = pd.read_csv('df1.csv')
+all_df = pd.read_csv('clean_data.csv')
+
+
+
+
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP],
                 meta_tags=[{'name': 'viewport',
                             'content': 'width=device-width, initial-scale=1.0'}]
@@ -112,12 +118,12 @@ dbc.Col([
 dbc.Row([
     
     dbc.Col([
-        dcc.Dropdown(id= 'my-dpdn', multi=False, value='AMZN',
-        options=[{'label': x, 'value': x }
-        for x in sorted(df['Symbols'].unique())]),
+        dcc.Dropdown(id= 'my-dpdn', multi=False, value='10',
+        options=[{'label': i, 'value': i }
+        for i in range(1,11)]),
     
     dcc.Graph(id ='line-fig',figure={})
-    ],width={'size':5,'offset':0,'order':1})
+    ])
 
     ])
 
@@ -133,10 +139,12 @@ dbc.Row([
     Output('line-fig', 'figure'),
     Input('my-dpdn', 'value')
 )
-def update_graph(stock_slctd):
-    dff = df[df['Symbols']==stock_slctd]
-    figln = px.line(dff, x='Date', y='High')
-    return figln
+def rating_drug(rate):
+    top_10 = all_df[all_df.rating == rate]['drugName'].value_counts()[:10]
+    fig = go.Figure()
+    fig.add_bar(x=top_10.index,y=top_10)
+    return fig
+
 
 if __name__ =='__main__':
     app.run_server(debug=True, port=4000)
