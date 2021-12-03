@@ -17,7 +17,7 @@ Dataset link: [click here](https://www.kaggle.com/jessicali9530/kuc-hackathon-wi
 Clone the project
 
 ```bash
-  git clone https://github.com/shubendu/Dash-Plotly.git
+  git clone https://github.com/shubendu/Sentiment-Analytical-Tool.git
 ```
 
 Go to the project directory
