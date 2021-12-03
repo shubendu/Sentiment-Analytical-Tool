@@ -44,7 +44,7 @@ Run app.py
 
 - [Live Demo](http://mvp.moogle.co:9042/)
                      
-![App Screenshot](images/20211203_164641.gif)
+![App Screenshot](Main_files/20211203_164641.gif)
   
 ## Authors
 
